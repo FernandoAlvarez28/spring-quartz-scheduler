@@ -1,5 +1,5 @@
 server:
-  port: 0 #Random port, as the Sender is 8080
+  port: 0 #Random port, as the Producer is 8080
 
 spring:
   datasource:
