@@ -1,4 +1,4 @@
-package alvarez.fernando.quartzscheduler.producer;
+package alvarez.fernando.quartzscheduler.producer.fakeorder;
 
 import alvarez.fernando.quartzscheduler.core.fakeorder.FakeOrderService;
 import lombok.AllArgsConstructor;
