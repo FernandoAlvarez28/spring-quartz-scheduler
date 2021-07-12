@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/main}">
+
+	<th:block layout:fragment="content">
+		<section class="ftco-section">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-md-6 text-center mb-5">
+						<h2 class="heading-section">Your (fake) orders</h2>
+					</div>
+				</div>
+
+				<div class="row mb-5 justify-content-center">
+					<form th:action="@{/orders}" method="POST">
+						<input type="number" name="quantity" required min="0" />
+						<button class="btn btn-primary" type="submit">Purchase!</button>
+					</form>
+				</div>
+
+				<div class="row justify-content-center" th:if="${#lists.isEmpty(orders)}">
+					<div class="col-md-6 text-center mb-5">
+						<h2 class="heading-section text-secondary">You didn't ordered anything yet</h2>
+					</div>
+				</div>
+
+				<div class="row" th:unless="${#lists.isEmpty(orders)}">
+					<div class="col-md-12">
+						<div class="table-wrap">
+							<table class="table table-responsive-xl">
+								<thead>
+									<tr>
+<!--										private Long id;-->
+<!--	-->
+<!--										@Temporal(TemporalType.TIMESTAMP)-->
+<!--										@Column(name = "CREATION_DATE", nullable = false)-->
+<!--										private Date creationDate = new Date();-->
+<!--	-->
+<!--										@Column(name = "PROCESSED", nullable = false)-->
+<!--										private boolean processed = false;-->
+<!--	-->
+<!--										@Temporal(TemporalType.TIMESTAMP)-->
+<!--										@Column(name = "PROCESSED_DATE")-->
+<!--										private Date processedDate;-->
+										<th>ID</th>
+										<th>Creation Date</th>
+										<th>Status</th>
+										<th>Processed Date</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="alert" role="alert" th:each="order : ${orders}">
+<!--										<td class="d-flex align-items-center">-->
+<!--											<div class="img" style="background-image: url(images/person_1.jpg);"></div>-->
+<!--											<div class="pl-3 email">-->
+<!--												<span>markotto@email.com</span>-->
+<!--												<span>Added: 01/03/2020</span>-->
+<!--											</div>-->
+<!--										</td>-->
+										<td th:text="${order.id}">123456</td>
+										<td th:text="${#dates.format(order.creationDate, 'MM/dd/yyyy')}">MM/dd/yyyy</td>
+										<td class="status">
+											<span th:if="${order.processed}" class="active">Processed</span>
+											<span th:unless="${order.processed}" class="waiting">Pending</span>
+										</td>
+										<td th:text="${order.processedDate != null ? #dates.format(order.processedDate, 'MM/dd/yyyy') : '--'}">MM/dd/yyyy</td>
+<!--										<td>-->
+<!--											<button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
+<!--												<span aria-hidden="true"><i class="fa fa-close"></i></span>-->
+<!--											</button>-->
+<!--										</td>-->
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</th:block>
+
+</html>
