@@ -29,18 +29,6 @@
 							<table class="table table-responsive-xl">
 								<thead>
 									<tr>
-<!--										private Long id;-->
-<!--	-->
-<!--										@Temporal(TemporalType.TIMESTAMP)-->
-<!--										@Column(name = "CREATION_DATE", nullable = false)-->
-<!--										private Date creationDate = new Date();-->
-<!--	-->
-<!--										@Column(name = "PROCESSED", nullable = false)-->
-<!--										private boolean processed = false;-->
-<!--	-->
-<!--										@Temporal(TemporalType.TIMESTAMP)-->
-<!--										@Column(name = "PROCESSED_DATE")-->
-<!--										private Date processedDate;-->
 										<th>ID</th>
 										<th>Creation Date</th>
 										<th>Status</th>
@@ -49,13 +37,6 @@
 								</thead>
 								<tbody>
 									<tr class="alert" role="alert" th:each="order : ${orders}">
-<!--										<td class="d-flex align-items-center">-->
-<!--											<div class="img" style="background-image: url(images/person_1.jpg);"></div>-->
-<!--											<div class="pl-3 email">-->
-<!--												<span>markotto@email.com</span>-->
-<!--												<span>Added: 01/03/2020</span>-->
-<!--											</div>-->
-<!--										</td>-->
 										<td th:text="${order.id}">123456</td>
 										<td th:text="${#dates.format(order.creationDate, 'MM/dd/yyyy')}">MM/dd/yyyy</td>
 										<td class="status">
@@ -63,11 +44,6 @@
 											<span th:unless="${order.processed}" class="waiting">Pending</span>
 										</td>
 										<td th:text="${order.processedDate != null ? #dates.format(order.processedDate, 'MM/dd/yyyy') : '--'}">MM/dd/yyyy</td>
-<!--										<td>-->
-<!--											<button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
-<!--												<span aria-hidden="true"><i class="fa fa-close"></i></span>-->
-<!--											</button>-->
-<!--										</td>-->
 									</tr>
 								</tbody>
 							</table>
