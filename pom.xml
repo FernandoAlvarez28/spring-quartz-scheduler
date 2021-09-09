@@ -20,7 +20,7 @@
 	<modules>
 		<module>quartz-scheduler-core</module>
 		<module>quartz-scheduler-web</module>
-		<module>quartz-scheduler-consumer</module>
+		<module>quartz-scheduler-executor</module>
 	</modules>
 
 </project>
