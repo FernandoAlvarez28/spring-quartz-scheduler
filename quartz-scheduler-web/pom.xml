@@ -10,7 +10,7 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>quartz-scheduler-producer</artifactId>
+	<artifactId>quartz-scheduler-web</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<properties>

@@ -1,4 +1,4 @@
-package alvarez.fernando.quartzscheduler.producer.h2;
+package alvarez.fernando.quartzscheduler.web.h2;
 
 import org.h2.tools.Server;
 import org.springframework.context.annotation.Bean;

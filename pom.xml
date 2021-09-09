@@ -19,7 +19,7 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>quartz-scheduler-core</module>
-		<module>quartz-scheduler-producer</module>
+		<module>quartz-scheduler-web</module>
 		<module>quartz-scheduler-consumer</module>
 	</modules>
 

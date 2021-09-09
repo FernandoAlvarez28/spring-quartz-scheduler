@@ -1,4 +1,4 @@
-package alvarez.fernando.quartzscheduler.producer;
+package alvarez.fernando.quartzscheduler.web;
 
 import alvarez.fernando.quartzscheduler.core.Constants;
 import org.springframework.boot.SpringApplication;
@@ -9,10 +9,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication(scanBasePackages = Constants.BASE_PACKAGE_WILDCARD)
 @EnableJpaRepositories(basePackages = Constants.BASE_PACKAGE_WILDCARD)
 @EntityScan(basePackages = Constants.BASE_PACKAGE_WILDCARD)
-public class QuartzSchedulerProducerApplication {
+public class QuartzSchedulerWebApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(QuartzSchedulerProducerApplication.class, args);
+		SpringApplication.run(QuartzSchedulerWebApplication.class, args);
 	}
 
 }
