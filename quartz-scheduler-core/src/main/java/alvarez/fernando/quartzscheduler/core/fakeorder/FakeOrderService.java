@@ -2,8 +2,10 @@ package alvarez.fernando.quartzscheduler.core.fakeorder;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -24,8 +26,24 @@ public class FakeOrderService {
 		return fakeOrders;
 	}
 	
+	public void updateStatus(Collection<FakeOrder> fakeOrders, FakeOrder.Status newStatus) {
+		if (CollectionUtils.isEmpty(fakeOrders)) {
+			return;
+		}
+		
+		for (FakeOrder fakeOrder : fakeOrders) {
+			fakeOrder.updateStatus(newStatus);
+		}
+		
+		fakeOrderRepository.saveAll(fakeOrders);
+	}
+	
 	public List<FakeOrder> listAllOrdersByCreationDateDesc() {
 		return fakeOrderRepository.listAllOrdersByCreationDateDesc();
+	}
+	
+	public List<FakeOrder> listRecentlyCreatedOrders() {
+		return fakeOrderRepository.listAllOrdersByStatusOrderingByIdAsc(FakeOrder.Status.NEW);
 	}
 	
 }
