@@ -31,8 +31,8 @@ public class FakeOrderPaymentConfirmationJobSchedulerImpl extends JobScheduler {
 				.forJob(this.jobDetail)
 				//The trigger's ID must be unique too, but only among the other triggers (so you can use the same Job ID)
 				.withIdentity(this.jobDetail.getKey().getName(), super.identification.getTriggerGroup())
-				.withDescription("Repeat every minute")
-				.withSchedule(CronScheduleBuilder.cronSchedule("0 * * * * ?").withMisfireHandlingInstructionFireAndProceed())
+				.withDescription("Repeat every 30 seconds")
+				.withSchedule(CronScheduleBuilder.cronSchedule("0/30 * * * * ?").withMisfireHandlingInstructionFireAndProceed())
 				.build();
 	}
 	
