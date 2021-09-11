@@ -9,14 +9,14 @@ import java.util.Collections;
 import java.util.Set;
 
 @Component
-public class RecentlyCreatedFakeOrderJobSchedulerImpl extends JobScheduler {
+public class FakeOrderPaymentConfirmationJobSchedulerImpl extends JobScheduler {
 	
 	private final JobDetail jobDetail;
 	
 	private final Trigger trigger;
 	
-	public RecentlyCreatedFakeOrderJobSchedulerImpl() {
-		super(Jobs.RECENTLY_CREATED_FAKE_ORDER_JOB);
+	public FakeOrderPaymentConfirmationJobSchedulerImpl() {
+		super(Jobs.FAKE_ORDER_PAYMENT_CONFIRMATION_JOB);
 		
 		this.jobDetail = JobBuilder.newJob(super.identification.getJobClass())
 				//Must use a unique ID for the Jobs (e.g.: don't use "UUID.randomUUID()")

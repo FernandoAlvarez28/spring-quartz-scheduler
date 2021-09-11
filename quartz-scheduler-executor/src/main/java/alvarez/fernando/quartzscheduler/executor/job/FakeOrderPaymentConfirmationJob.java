@@ -9,7 +9,7 @@ import org.springframework.scheduling.quartz.QuartzJobBean;
 import java.util.List;
 
 @AllArgsConstructor
-public class RecentlyCreatedFakeOrderJob extends QuartzJobBean {
+public class FakeOrderPaymentConfirmationJob extends QuartzJobBean {
 	
 	private final FakeOrderService fakeOrderService;
 	
@@ -17,7 +17,7 @@ public class RecentlyCreatedFakeOrderJob extends QuartzJobBean {
 	protected void executeInternal(JobExecutionContext jobExecutionContext) {
 		final List<FakeOrder> recentlyCreatedOrders = fakeOrderService.listRecentlyCreatedOrders();
 		
-		fakeOrderService.updateStatus(recentlyCreatedOrders, FakeOrder.Status.STEP_ONE);
+		fakeOrderService.updateStatus(recentlyCreatedOrders, FakeOrder.Status.PAID);
 	}
 	
 }

@@ -1,6 +1,6 @@
 package alvarez.fernando.quartzscheduler.executor.job.configuration;
 
-import alvarez.fernando.quartzscheduler.executor.job.RecentlyCreatedFakeOrderJob;
+import alvarez.fernando.quartzscheduler.executor.job.FakeOrderPaymentConfirmationJob;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.quartz.Job;
@@ -9,7 +9,7 @@ import org.quartz.Job;
 @AllArgsConstructor
 public enum Jobs implements JobIdentification {
 	
-	RECENTLY_CREATED_FAKE_ORDER_JOB(RecentlyCreatedFakeOrderJob.class, "fake-order.recently-created", "Process recently created Orders"),
+	FAKE_ORDER_PAYMENT_CONFIRMATION_JOB(FakeOrderPaymentConfirmationJob.class, "fake-order.payment-confirmation", "Confirm Orders payment"),
 	;
 	
 	private final Class<? extends Job> jobClass;

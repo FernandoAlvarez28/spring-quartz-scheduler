@@ -51,9 +51,9 @@ public class FakeOrder {
 	public enum Status {
 		
 		NEW("New"),
-		STEP_ONE("Step One"),
-		STEP_TWO("Step Two"),
-		STEP_THREE("Step Three"),
+		PAID("Paid"),
+		SENT("Sent"),
+		DELIVERED("Delivered"),
 		FINISHED("Finished"),
 		;
 		
