@@ -42,6 +42,10 @@ public class FakeOrder {
 		}
 	}
 	
+	public boolean isExpired() {
+		return Status.EXPIRED.equals(this.status);
+	}
+	
 	public boolean isProcessed() {
 		return Status.FINISHED.equals(this.status);
 	}
@@ -52,6 +56,7 @@ public class FakeOrder {
 		
 		NEW("New"),
 		PAID("Paid"),
+		EXPIRED("Expired"),
 		SENT("Sent"),
 		DELIVERED("Delivered"),
 		FINISHED("Finished"),
