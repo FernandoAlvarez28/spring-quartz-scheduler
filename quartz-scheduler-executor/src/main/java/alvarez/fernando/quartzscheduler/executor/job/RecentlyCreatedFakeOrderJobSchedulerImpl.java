@@ -5,7 +5,6 @@ import alvarez.fernando.quartzscheduler.executor.job.configuration.Jobs;
 import org.quartz.*;
 import org.springframework.stereotype.Component;
 
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Set;
 import java.util.UUID;
@@ -27,17 +26,11 @@ public class RecentlyCreatedFakeOrderJobSchedulerImpl extends JobScheduler {
 				.storeDurably()
 				.build();
 		
-		final Calendar startDate = Calendar.getInstance();
-		startDate.set(Calendar.SECOND, 0);
-		startDate.set(Calendar.MILLISECOND, 0);
-		startDate.set(Calendar.MINUTE, startDate.get(Calendar.MINUTE) + 2);
-		
 		this.trigger = TriggerBuilder.newTrigger()
 				.forJob(this.jobDetail)
 				.withIdentity(this.jobDetail.getKey().getName(), super.identification.getTriggerGroup())
 				.withDescription("Repeat every minute")
-				.startAt(startDate.getTime())
-				.withSchedule(SimpleScheduleBuilder.repeatMinutelyForever().withMisfireHandlingInstructionFireNow())
+				.withSchedule(CronScheduleBuilder.cronSchedule("0 * * * * ?").withMisfireHandlingInstructionFireAndProceed())
 				.build();
 	}
 	
