@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 import java.util.Set;
-import java.util.UUID;
 
 @Component
 public class RecentlyCreatedFakeOrderJobSchedulerImpl extends JobScheduler {
@@ -20,7 +19,9 @@ public class RecentlyCreatedFakeOrderJobSchedulerImpl extends JobScheduler {
 		super(Jobs.RECENTLY_CREATED_FAKE_ORDER_JOB);
 		
 		this.jobDetail = JobBuilder.newJob(super.identification.getJobClass())
-				.withIdentity(UUID.randomUUID().toString(), super.identification.getJobGroup())
+				//Must use a unique ID for the Jobs (e.g.: don't use "UUID.randomUUID()")
+				//or else a new job is created in the database at every Executor startup
+				.withIdentity(super.identification.toString(), super.identification.getJobGroup())
 				.withDescription(super.identification.getJobDescription())
 				.requestRecovery(true)
 				.storeDurably()
@@ -28,6 +29,7 @@ public class RecentlyCreatedFakeOrderJobSchedulerImpl extends JobScheduler {
 		
 		this.trigger = TriggerBuilder.newTrigger()
 				.forJob(this.jobDetail)
+				//The trigger's ID must be unique too, but only among the other triggers (so you can use the same Job ID)
 				.withIdentity(this.jobDetail.getKey().getName(), super.identification.getTriggerGroup())
 				.withDescription("Repeat every minute")
 				.withSchedule(CronScheduleBuilder.cronSchedule("0 * * * * ?").withMisfireHandlingInstructionFireAndProceed())
