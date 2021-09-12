@@ -13,7 +13,7 @@ import java.util.Random;
 @AllArgsConstructor
 public class FakeOrderPaymentConfirmationJob extends QuartzJobBean {
 	
-	private static final float CHANCE_TO_EXPIRE = 0.35f;
+	private static final float MINIMUM_CHANCE_TO_EXPIRE = 0.65f;
 	
 	private final Random random = new Random();
 	
@@ -29,7 +29,7 @@ public class FakeOrderPaymentConfirmationJob extends QuartzJobBean {
 		
 		final float chance = this.random.nextFloat();
 		
-		if (chance >= (1 - CHANCE_TO_EXPIRE)) {
+		if (chance >= MINIMUM_CHANCE_TO_EXPIRE) {
 			final float ordersPercentageToExpire = this.random.nextFloat();
 			final int quantityToExpire = (int) (recentlyCreatedOrders.size() * ordersPercentageToExpire);
 			
