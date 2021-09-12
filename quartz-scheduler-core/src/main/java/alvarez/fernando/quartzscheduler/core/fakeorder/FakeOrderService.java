@@ -46,4 +46,12 @@ public class FakeOrderService {
 		return fakeOrderRepository.listAllOrdersByStatusOrderingByIdAsc(FakeOrder.Status.NEW);
 	}
 	
+	public List<FakeOrder> listPaidOrders() {
+		return fakeOrderRepository.listAllOrdersByStatusOrderingByIdAsc(FakeOrder.Status.PAID);
+	}
+	
+	public List<FakeOrder> listSentOrders() {
+		return fakeOrderRepository.listAllOrdersByStatusOrderingByIdAsc(FakeOrder.Status.SENT);
+	}
+	
 }
