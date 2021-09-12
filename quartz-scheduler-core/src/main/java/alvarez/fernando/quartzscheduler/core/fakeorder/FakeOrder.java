@@ -37,7 +37,7 @@ public class FakeOrder {
 		
 		this.status = newStatus;
 		
-		if (Status.FINISHED.equals(newStatus)) {
+		if (Status.DELIVERED.equals(newStatus)) {
 			this.processedDate = new Date();
 		}
 	}
@@ -47,7 +47,7 @@ public class FakeOrder {
 	}
 	
 	public boolean isProcessed() {
-		return Status.FINISHED.equals(this.status);
+		return Status.DELIVERED.equals(this.status);
 	}
 	
 	@Getter
@@ -59,7 +59,6 @@ public class FakeOrder {
 		EXPIRED("Expired"),
 		SENT("Sent"),
 		DELIVERED("Delivered"),
-		FINISHED("Finished"),
 		;
 		
 		private final String description;
