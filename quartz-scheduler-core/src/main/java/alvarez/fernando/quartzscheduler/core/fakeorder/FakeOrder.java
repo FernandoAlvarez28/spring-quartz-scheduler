@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.awt.*;
 import java.util.Date;
 
 @Getter
@@ -54,14 +55,16 @@ public class FakeOrder {
 	@AllArgsConstructor
 	public enum Status {
 		
-		NEW("New"),
-		PAID("Paid"),
-		EXPIRED("Expired"),
-		SENT("Sent"),
-		DELIVERED("Delivered"),
+		NEW("New", Color.GRAY),
+		PAID("Paid", Color.ORANGE.darker()),
+		EXPIRED("Expired", Color.RED.darker()),
+		SENT("Sent", Color.BLUE.darker()),
+		DELIVERED("Delivered", Color.GREEN.darker()),
 		;
 		
 		private final String description;
+		
+		private final Color color;
 		
 	}
 	

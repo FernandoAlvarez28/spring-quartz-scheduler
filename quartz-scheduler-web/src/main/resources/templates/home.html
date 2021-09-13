@@ -40,7 +40,12 @@
 										<td th:text="${order.id}">123456</td>
 										<td th:text="${#dates.format(order.creationDate, 'MM/dd/yyyy')}">MM/dd/yyyy</td>
 										<td class="status">
-											<span th:text="${order.status.description}" th:class="${order.processed} ? 'active' : 'waiting'">Status</span>
+											<span th:text="${order.status.description}" th:style="|
+											color: rgb(${order.status.color.red}, ${order.status.color.blue}, ${order.status.color.green});
+											background: rgba(${order.status.color.red}, ${order.status.color.blue}, ${order.status.color.green}, 0.1);
+											border-radius: 30px;
+											padding: 4px 10px 4px 10px;
+											|">Status</span>
 										</td>
 										<td th:text="${order.processedDate != null ? #dates.format(order.processedDate, 'MM/dd/yyyy') : '--'}">MM/dd/yyyy</td>
 									</tr>
