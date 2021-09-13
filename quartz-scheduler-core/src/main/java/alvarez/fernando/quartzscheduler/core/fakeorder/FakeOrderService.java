@@ -7,6 +7,7 @@ import org.springframework.util.CollectionUtils;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @AllArgsConstructor
@@ -52,6 +53,10 @@ public class FakeOrderService {
 	
 	public List<FakeOrder> listSentOrders() {
 		return fakeOrderRepository.listAllOrdersByStatusOrderingByIdAsc(FakeOrder.Status.SENT);
+	}
+	
+	public Map<FakeOrder.Status, Long> countByStatus() {
+		return fakeOrderRepository.countByStatus();
 	}
 	
 }

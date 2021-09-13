@@ -24,6 +24,10 @@
 				</div>
 
 				<div class="row" th:unless="${#lists.isEmpty(orders)}">
+					<div class="row justify-content-center mb-5" style="position: relative; height: 300px; width: 300px; margin: 0 auto;">
+						<canvas id="orderStatusDoughnutChart"></canvas>
+					</div>
+
 					<div class="col-md-12">
 						<div class="table-wrap">
 							<table class="table table-responsive-xl">
