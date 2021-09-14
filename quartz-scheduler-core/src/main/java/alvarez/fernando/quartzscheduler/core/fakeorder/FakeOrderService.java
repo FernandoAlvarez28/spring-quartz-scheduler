@@ -1,5 +1,6 @@
 package alvarez.fernando.quartzscheduler.core.fakeorder;
 
+import alvarez.fernando.quartzscheduler.core.notification.NotificationService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,8 @@ import java.util.Map;
 public class FakeOrderService {
 	
 	private final FakeOrderRepository fakeOrderRepository;
+	
+	private final NotificationService notificationService;
 	
 	public List<FakeOrder> createMany(int quantity) {
 		final List<FakeOrder> fakeOrders = new ArrayList<>(quantity);
@@ -40,6 +43,14 @@ public class FakeOrderService {
 		}
 		
 		fakeOrderRepository.saveAll(fakeOrders);
+		
+		try {
+			for (FakeOrder fakeOrder : fakeOrders) {
+				notificationService.notifyAboutChangedStatus(fakeOrder);
+			}
+		} catch (Exception e) {
+			log.error("Error while sending notifications", e);
+		}
 	}
 	
 	public List<FakeOrder> listAllOrdersByCreationDateDesc() {
