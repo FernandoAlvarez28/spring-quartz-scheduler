@@ -3,6 +3,7 @@ package alvarez.fernando.quartzscheduler.executor.job;
 import alvarez.fernando.quartzscheduler.core.fakeorder.FakeOrder;
 import alvarez.fernando.quartzscheduler.core.fakeorder.FakeOrderService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.quartz.JobExecutionContext;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.util.CollectionUtils;
@@ -10,6 +11,7 @@ import org.springframework.util.CollectionUtils;
 import java.util.List;
 import java.util.Random;
 
+@Slf4j
 @AllArgsConstructor
 public class FakeOrderPaymentConfirmationJob extends QuartzJobBean {
 	
@@ -24,7 +26,14 @@ public class FakeOrderPaymentConfirmationJob extends QuartzJobBean {
 		final List<FakeOrder> recentlyCreatedOrders = fakeOrderService.listRecentlyCreatedOrders();
 		
 		if (CollectionUtils.isEmpty(recentlyCreatedOrders)) {
+			log.info("Nothing to process");
 			return;
+		}
+		
+		if (recentlyCreatedOrders.size() == 1) {
+			log.info("1 new FakeOrder to process");
+		} else {
+			log.info("{} new FakeOrders to process", recentlyCreatedOrders.size());
 		}
 		
 		final float chance = this.random.nextFloat();

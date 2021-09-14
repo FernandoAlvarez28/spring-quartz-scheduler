@@ -1,6 +1,7 @@
 package alvarez.fernando.quartzscheduler.core.fakeorder;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@Slf4j
 @AllArgsConstructor
 public class FakeOrderService {
 	
@@ -33,6 +35,7 @@ public class FakeOrderService {
 		}
 		
 		for (FakeOrder fakeOrder : fakeOrders) {
+			log.info("Updating FakeOrder {}'s status to {}", fakeOrder.getId(), newStatus);
 			fakeOrder.updateStatus(newStatus);
 		}
 		
