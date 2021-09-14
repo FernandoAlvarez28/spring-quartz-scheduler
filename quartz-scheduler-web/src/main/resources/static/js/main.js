@@ -13,8 +13,8 @@ $(document).ready(function() {
 				var i = 0;
 				for (var i = 0; i < data.colors.length; i++) {
 					const color = data.colors[i];
-					opaqueColors[i] = `rgba(${color.red}, ${color.blue}, ${color.green}, 1)`;
-					transparentColors[i] = `rgba(${color.red}, ${color.blue}, ${color.green}, 0.2)`;
+					opaqueColors[i] = `rgba(${color.red}, ${color.green}, ${color.blue}, 1)`;
+					transparentColors[i] = `rgba(${color.red}, ${color.green}, ${color.blue}, 0.2)`;
 				}
 
 				const myChart = new Chart(orderStatusDoughnutChart, {

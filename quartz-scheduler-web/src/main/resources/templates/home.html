@@ -45,8 +45,8 @@
 										<td th:text="${#dates.format(order.creationDate, 'MM/dd/yyyy')}">MM/dd/yyyy</td>
 										<td class="status">
 											<span th:text="${order.status.description}" th:style="|
-											color: rgb(${order.status.color.red}, ${order.status.color.blue}, ${order.status.color.green});
-											background: rgba(${order.status.color.red}, ${order.status.color.blue}, ${order.status.color.green}, 0.1);
+											color: rgb(${order.status.color.red}, ${order.status.color.green}, ${order.status.color.blue});
+											background: rgba(${order.status.color.red}, ${order.status.color.green}, ${order.status.color.blue}, 0.1);
 											border-radius: 30px;
 											padding: 4px 10px 4px 10px;
 											|">Status</span>

@@ -44,13 +44,13 @@ public class FakeOrderStats {
 	public static class ColorVO {
 		
 		private final int red;
-		private final int blue;
 		private final int green;
+		private final int blue;
 		
 		private ColorVO(Color color) {
 			this.red = color.getRed();
-			this.blue = color.getBlue();
 			this.green = color.getGreen();
+			this.blue = color.getBlue();
 		}
 		
 	}
