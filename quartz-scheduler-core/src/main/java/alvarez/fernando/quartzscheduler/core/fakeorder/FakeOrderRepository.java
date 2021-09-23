@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 interface FakeOrderRepository extends JpaRepository<FakeOrder, Long>, FakeOrderStatsRepository {
 
-	@Query("FROM FakeOrder ORDER BY id DESC") //Ordering by ID because it's created too fast for having any difference ordering by creationDate
+	@Query("FROM FakeOrder AS FO LEFT JOIN FETCH FO.notifications ORDER BY FO.id DESC") //Ordering by ID because it's created too fast for having any difference ordering by creationDate
 	List<FakeOrder> listAllOrdersByCreationDateDesc();
 
 	@Query("FROM FakeOrder WHERE status = :status ORDER BY id ASC")

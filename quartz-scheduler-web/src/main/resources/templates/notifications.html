@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/main}">
+
+	<th:block layout:fragment="content">
+		<section class="ftco-section">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-md-6 text-center mb-5">
+						<h2 class="heading-section" th:text="'Notifications for (fake) Order #' + ${order.id}">Notifications for (fake) Order #</h2>
+					</div>
+				</div>
+
+				<div class="row justify-content-center" th:if="${#lists.isEmpty(notifications)}">
+					<div class="col-md-6 text-center mb-5">
+						<h2 class="heading-section text-secondary">No Notifications for this Order</h2>
+					</div>
+				</div>
+
+				<div class="row" th:unless="${#lists.isEmpty(notifications)}">
+					<div class="col-md-12">
+						<div class="table-wrap">
+							<table class="table table-responsive-xl">
+								<thead>
+									<tr>
+										<th>ID</th>
+										<th>Notification Date</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="alert" role="alert" th:each="notification : ${notifications}">
+										<td th:text="${notification.id}">123456</td>
+										<td th:text="${#dates.format(notification.date, 'MM/dd/yyyy HH:mm:ss')}">MM/dd/yyyy HH:mm:ss</td>
+										<td class="status" th:with="status = ${notification.fakeOrderStatus}">
+											<span th:text="${status.description}" th:style="|
+											color: rgb(${status.color.red}, ${status.color.green}, ${status.color.blue});
+											background: rgba(${status.color.red}, ${status.color.green}, ${status.color.blue}, 0.1);
+											border-radius: 30px;
+											padding: 4px 10px 4px 10px;
+											|">Status</span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</th:block>
+
+</html>

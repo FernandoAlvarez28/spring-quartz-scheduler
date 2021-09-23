@@ -6,10 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @Slf4j
@@ -51,6 +48,10 @@ public class FakeOrderService {
 		} catch (Exception e) {
 			log.error("Error while sending notifications", e);
 		}
+	}
+	
+	public Optional<FakeOrder> findById(Long fakeOrderId) {
+		return fakeOrderRepository.findById(fakeOrderId);
 	}
 	
 	public List<FakeOrder> listAllOrdersByCreationDateDesc() {

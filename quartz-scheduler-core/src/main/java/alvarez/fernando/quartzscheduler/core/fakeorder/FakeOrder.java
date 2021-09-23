@@ -1,12 +1,15 @@
 package alvarez.fernando.quartzscheduler.core.fakeorder;
 
+import alvarez.fernando.quartzscheduler.core.notification.Notification;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
 import java.awt.*;
-import java.util.Date;
+import java.util.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -31,6 +34,9 @@ public class FakeOrder {
 	@Column(name = "PROCESSED_DATE")
 	private Date processedDate;
 	
+	@OneToMany(mappedBy = "fakeOrder", fetch = FetchType.LAZY)
+	private List<Notification> notifications;
+	
 	public void updateStatus(Status newStatus) {
 		if (this.status.equals(newStatus)) {
 			return;
@@ -49,6 +55,24 @@ public class FakeOrder {
 	
 	public boolean isProcessed() {
 		return Status.DELIVERED.equals(this.status);
+	}
+	
+	public boolean hasDuplicatedNotifications() {
+		if (CollectionUtils.isEmpty(this.notifications)) {
+			return false;
+		}
+		
+		final Set<Status> notifiedStatus = new HashSet<>(this.notifications.size());
+		
+		for (Notification notification : this.notifications) {
+			if (notifiedStatus.contains(notification.getFakeOrderStatus())) {
+				return true;
+			}
+			
+			notifiedStatus.add(notification.getFakeOrderStatus());
+		}
+		
+		return false;
 	}
 	
 	@Getter

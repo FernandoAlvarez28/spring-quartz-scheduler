@@ -37,6 +37,7 @@
 										<th>Creation Date</th>
 										<th>Status</th>
 										<th>Processed Date</th>
+										<th>Notifications</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -52,6 +53,18 @@
 											|">Status</span>
 										</td>
 										<td th:text="${order.processedDate != null ? #dates.format(order.processedDate, 'MM/dd/yyyy HH:mm:ss') : '--'}">MM/dd/yyyy HH:mm:ss</td>
+										<td>
+											<th:block th:if="${#lists.isEmpty(order.notifications)}">
+												0 notifications
+											</th:block>
+											<th:block th:unless="${#lists.isEmpty(order.notifications)}" th:with="notificationsQuantity = ${#lists.size(order.notifications)}">
+												<a th:href="@{/orders/{fakeOrderId}/notifications (fakeOrderId = ${order.id})}"
+												   th:text="${notificationsQuantity == 1} ? '1 notification' : |${notificationsQuantity} notifications|">
+													X notifications
+												</a>
+												<span th:if="${order.hasDuplicatedNotifications()}">Duplicated notification!</span>
+											</th:block>
+										</td>
 									</tr>
 								</tbody>
 							</table>

@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * {@link NotificationService}'s implementation that actually doesn't notify anything, just pretend for demonstration purposes.
  */
@@ -26,6 +28,11 @@ public class NotificationServiceFakeImpl implements NotificationService {
 		} catch (InterruptedException e) {
 			Thread.currentThread().interrupt();
 		}
+	}
+	
+	@Override
+	public List<Notification> listByFakeOrder(FakeOrder fakeOrder) {
+		return notificationRepository.listByFakeOrder(fakeOrder);
 	}
 	
 }
