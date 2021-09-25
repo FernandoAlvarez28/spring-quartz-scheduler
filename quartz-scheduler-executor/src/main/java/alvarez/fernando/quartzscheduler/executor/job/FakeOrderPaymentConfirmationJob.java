@@ -4,6 +4,7 @@ import alvarez.fernando.quartzscheduler.core.fakeorder.FakeOrder;
 import alvarez.fernando.quartzscheduler.core.fakeorder.FakeOrderService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.quartz.DisallowConcurrentExecution;
 import org.quartz.JobExecutionContext;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.util.CollectionUtils;
@@ -13,6 +14,7 @@ import java.util.Random;
 
 @Slf4j
 @AllArgsConstructor
+@DisallowConcurrentExecution
 public class FakeOrderPaymentConfirmationJob extends QuartzJobBean {
 	
 	private static final float MINIMUM_CHANCE_TO_EXPIRE = 0.65f;

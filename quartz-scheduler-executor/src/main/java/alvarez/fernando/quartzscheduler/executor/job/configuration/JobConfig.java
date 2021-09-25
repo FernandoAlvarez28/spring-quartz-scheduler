@@ -30,28 +30,45 @@ public class JobConfig implements ApplicationListener<ApplicationReadyEvent> {
 	@Override
 	public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
 		try {
-			scheduler.scheduleJobs(this.jobs, true);
+			for (Map.Entry<JobDetail, Set<? extends Trigger>> entry : this.jobs.entrySet()) {
+				final JobDetail jobDetail = entry.getKey();
+				final Set<? extends Trigger> triggers = entry.getValue();
+				
+				if (!scheduler.checkExists(jobDetail.getKey())) {
+					//Only needs to schedule the first time. Any other instance will execute the jobs by reading them from database
+					scheduler.scheduleJob(jobDetail, triggers, true);
+					this.printScheduledJob(jobDetail, triggers);
+				} else {
+					this.printConfiguredJob(jobDetail, triggers);
+				}
+			}
 		} catch (SchedulerException e) {
 			throw new BeanInstantiationException(this.getClass(), "Error while scheduling jobs", e);
 		}
-		log.info("{} Jobs scheduled", this.jobs.size());
 		
-		for (Map.Entry<JobDetail, Set<? extends Trigger>> entry : this.jobs.entrySet()) {
-			final JobDetail jobDetail = entry.getKey();
-			final Set<? extends Trigger> triggers = entry.getValue();
-			
-			final List<String> triggerAsString = new ArrayList<>(triggers.size());
-			for (Trigger trigger : triggers) {
-				if (trigger instanceof CronTrigger) {
-					triggerAsString.add(((CronTrigger) trigger).getCronExpression());
-				} else {
-					triggerAsString.add(trigger.toString());
-				}
+		log.info("{} Jobs configured", this.jobs.size());
+		
+	}
+	
+	private void printScheduledJob(JobDetail jobDetail, Set<? extends Trigger> triggers) {
+		printJob(jobDetail, triggers, "scheduled");
+	}
+	
+	private void printConfiguredJob(JobDetail jobDetail, Set<? extends Trigger> triggers) {
+		printJob(jobDetail, triggers, "configured");
+	}
+	
+	private void printJob(JobDetail jobDetail, Collection<? extends Trigger> triggers, String action) {
+		final List<String> triggerAsString = new ArrayList<>(triggers.size());
+		for (Trigger trigger : triggers) {
+			if (trigger instanceof CronTrigger) {
+				triggerAsString.add(((CronTrigger) trigger).getCronExpression());
+			} else {
+				triggerAsString.add(trigger.toString());
 			}
-			
-			log.info("Job {} scheduled for \"{}\": \"{}\"", jobDetail.getJobClass(), StringUtils.collectionToCommaDelimitedString(triggerAsString), jobDetail.getDescription());
 		}
 		
+		log.info("Job {} {} for \"{}\": \"{}\"", jobDetail.getJobClass(), action, StringUtils.collectionToCommaDelimitedString(triggerAsString), jobDetail.getDescription());
 	}
 	
 }
